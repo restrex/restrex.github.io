@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helix - Профиль</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Частицы */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, #ff7b00, #ff5500) padding-box,
+                        linear-gradient(135deg, #ff7b00, #ff5500) border-box;
+            box-shadow: 0 0 20px rgba(255, 123, 0, 0.7);
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 123, 0, 0.8);
+        }
+
+        .username {
+            font-size: 1.5rem;
+            color: #ff7b00;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 5px rgba(255, 123, 0, 0.7);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 123, 0, 0.1);
+            color: #ff7b00;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 123, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 123, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 123, 0, 0.7);
+            transform: translateY(-3px);
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Стили для стеклянных окон */
+        .card {
+            background: rgba(30, 30, 30, 0.25);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 123, 0, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ff7b00, transparent);
+            animation: glow 3s infinite;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 123, 0, 0.5);
+        }
+
+        .card h2 {
+            color: #ff7b00;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            padding-bottom: 0.5rem;
+            text-shadow: 0 0 8px rgba(255, 123, 0, 0.5);
+            position: relative;
+        }
+
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #ff7b00;
+            box-shadow: 0 0 5px #ff7b00;
+        }
+
+        .card p {
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill {
+            background: rgba(255, 123, 0, 0.1);
+            color: #ff7b00;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 123, 0, 0.3);
+            backdrop-filter: blur(5px);
+            text-shadow: 0 0 3px rgba(255, 123, 0, 0.5);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project {
+            background: rgba(50, 50, 50, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 123, 0, 0.1);
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .project:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 123, 0, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .project h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .project p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-item i {
+            width: 25px;
+            color: #ff7b00;
+            margin-right: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            color: #aaa;
+            backdrop-filter: blur(5px);
+            background: rgba(30, 30, 30, 0.3);
+            border-radius: 10px;
+        }
+
+        /* Анимация подсветки */
+        @keyframes glow {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Подсветка текста при наведении */
+        .highlight-text {
+            transition: all 0.3s ease;
+        }
+
+        .highlight-text:hover {
+            text-shadow: 0 0 10px rgba(255, 123, 0, 0.8);
+            color: #ffa500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .username {
+                font-size: 1.2rem;
+            }
+            
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Контейнер для частиц -->
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <header>
+            <div class="profile-img">
+                <img src="https://avatars.githubusercontent.com/u/225188338?v=4">
+            </div>
+            <h1>Helix</h1>
+            <div class="username">@Helixob</div>
+            <p class="tagline">Разработчик, создатель полезных скриптов и автоматизаций. Люблю создавать инструменты, которые упрощают жизнь.</p>
+            
+            <div class="social-links">
+                <a href="https://t.me/HelixScripts" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://t.me/helixob" class="social-link">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </header>
+        
+        <main>
+            <div class="content">
+                <div class="card">
+                    <h2 class="highlight-text">Обо мне</h2>
+                    <p>Развиваю свой телеграм канал по скриптам на Roblox, а также являюсь ИИ кодером. Создаю полезные инструменты и автоматизации для сообщества.</p>
+                    <p>Моя цель - помогать другим разработчикам и геймерам улучшать их опыт с помощью качественных скриптов и решений.</p>
+                </div>
+                
+                <div class="card">
+                    <h2 class="highlight-text">Факты</h2>
+                    <p>Ключевые факты обо мне:</p>
+                    <div class="skills">
+                        <span class="skill">Владелец телеграм каналов</span>
+                        <span class="skill">Вайбкодер</span>
+                        <span class="skill">Скриптер</span>
+                        <span class="skill">ИИ кодер</span>
+                        <span class="skill">Roblox разработчик</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 class="highlight-text">Связь со мной</h2>
+                    <div class="contact-item">
+                        <i class="fab fa-telegram"></i>
+                        <p>Telegram: <a href="https://t.me/helixob" style="color: #ff7b00; text-decoration: none;">@helixob</a></p>
+                    </div>
+                    <p>Пишите по любым вопросам связанным с сотрудничеством, скриптами или разработкой!</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="highlight-text">Телеграм каналы</h2>
+                <div class="projects">
+                    <a href="https://t.me/HelixScripts" class="project" target="_blank">
+                        <h3>Helix Scripts</h3>
+                        <p>Мой основной канал с полезными скриптами для Roblox и другими разработками. Подписывайся!</p>
+                    </a>
+                    <a href="https://t.me/helixob" class="project" target="_blank">
+                        <h3>Личный канал</h3>
+                        <p>Мой личный телеграм канал с обновлениями, анонсами и личными мыслями.</p>
+                    </a>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Helix. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <!-- Подключаем библиотеку для частиц -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Инициализация частиц
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#ff7b00"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: false
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    }
+                }
+            }
+        });
+
+        // Добавляем эффект подсветки при наведении на заголовки
+        document.querySelectorAll('.card h2').forEach(title => {
+            title.addEventListener('mouseenter', function() {
+                this.style.textShadow = '0 0 15px rgba(255, 123, 0, 0.8)';
+            });
+            
+            title.addEventListener('mouseleave', function() {
+                this.style.textShadow = '0 0 8px rgba(255, 123, 0, 0.5)';
+            });
+        });
+    </script>
+</body>
+</html>
