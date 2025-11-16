@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой профиль</title>
+    <title>Helix - Профиль</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -102,6 +102,352 @@
             text-decoration: none;
             font-size: 1.5rem;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 123, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 123, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 123, 0, 0.7);
+            transform: translateY(-3px);
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Стили для стеклянных окон */
+        .card {
+            background: rgba(30, 30, 30, 0.25);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 123, 0, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ff7b00, transparent);
+            animation: glow 3s infinite;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 123, 0, 0.5);
+        }
+
+        .card h2 {
+            color: #ff7b00;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            padding-bottom: 0.5rem;
+            text-shadow: 0 0 8px rgba(255, 123, 0, 0.5);
+            position: relative;
+        }
+
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #ff7b00;
+            box-shadow: 0 0 5px #ff7b00;
+        }
+
+        .card p {
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill {
+            background: rgba(255, 123, 0, 0.1);
+            color: #ff7b00;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 123, 0, 0.3);
+            backdrop-filter: blur(5px);
+            text-shadow: 0 0 3px rgba(255, 123, 0, 0.5);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project {
+            background: rgba(50, 50, 50, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 123, 0, 0.1);
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .project:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 123, 0, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .project h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .project p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-item i {
+            width: 25px;
+            color: #ff7b00;
+            margin-right: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            color: #aaa;
+            backdrop-filter: blur(5px);
+            background: rgba(30, 30, 30, 0.3);
+            border-radius: 10px;
+        }
+
+        /* Анимация подсветки */
+        @keyframes glow {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Подсветка текста при наведении */
+        .highlight-text {
+            transition: all 0.3s ease;
+        }
+
+        .highlight-text:hover {
+            text-shadow: 0 0 10px rgba(255, 123, 0, 0.8);
+            color: #ffa500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .username {
+                font-size: 1.2rem;
+            }
+            
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Контейнер для частиц -->
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <header>
+            <div class="profile-img">
+                <!-- Замените src на URL вашего изображения -->
+                <img src="https://via.placeholder.com/150" alt="Фото Helix">
+            </div>
+            <h1>Helix</h1>
+            <div class="username">@Helixob</div>
+            <p class="tagline">Разработчик, создатель полезных скриптов и автоматизаций. Люблю создавать инструменты, которые упрощают жизнь.</p>
+            
+            <div class="social-links">
+                <a href="https://t.me/HelixScripts" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://github.com" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://t.me/helixob" class="social-link">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </header>
+        
+        <main>
+            <div class="content">
+                <div class="card">
+                    <h2 class="highlight-text">Обо мне</h2>
+                    <p>Привет! Я Helix, разработчик с фокусом на создании полезных скриптов и автоматизаций. Моя цель - создавать инструменты, которые помогают людям решать повседневные задачи эффективнее.</p>
+                    <p>Увлекаюсь программированием, изучаю новые технологии и постоянно совершенствую свои навыки. Верю, что код может сделать мир лучше и удобнее.</p>
+                </div>
+                
+                <div class="card">
+                    <h2 class="highlight-text">Факты</h2>
+                    <p>Интересные факты обо мне:</p>
+                    <div class="skills">
+                        <span class="skill">Создаю полезные скрипты</span>
+                        <span class="skill">Люблю автоматизацию</span>
+                        <span class="skill">Работаю с Python</span>
+                        <span class="skill">Увлекаюсь веб-разработкой</span>
+                        <span class="skill">Изучаю новые технологии</span>
+                        <span class="skill">Помогаю сообществу</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 class="highlight-text">Связь со мной</h2>
+                    <div class="contact-item">
+                        <i class="fab fa-telegram"></i>
+                        <p>Telegram: <a href="https://t.me/helixob" style="color: #ff7b00; text-decoration: none;">@helixob</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>Email: helix@example.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-comment"></i>
+                        <p>Для сотрудничества и вопросов</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="highlight-text">Каналы</h2>
+                <div class="projects">
+                    <a href="https://t.me/HelixScripts" class="project" target="_blank">
+                        <h3>Helix Scripts</h3>
+                        <p>Мой основной канал с полезными скриптами, автоматизациями и IT-инструментами для упрощения работы.</p>
+                    </a>
+                    <a href="#" class="project">
+                        <h3>Helix Dev</h3>
+                        <p>Канал о разработке, программировании и новых технологиях (скоро будет доступен).</p>
+                    </a>
+                    <a href="#" class="project">
+                        <h3>Helix Tools</h3>
+                        <p>Полезные инструменты и утилиты для повседневного использования (в разработке).</p>
+                    </a>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Helix. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <!-- Подключаем библиотеку для частиц -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Инициализация частиц
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#ff7b00"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: false
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    }
+                }
+            }
+        });
+
+        // Добавляем эффект подсветки при наведении на заголовки
+        document.querySelectorAll('.card h2').forEach(title => {
+            title.addEventListener('mouseenter', function() {
+                this.style.textShadow = '0 0 15px rgba(255, 123, 0, 0.8)';
+            });
+            
+            title.addEventListener('mouseleave', function() {
+                this.style.textShadow = '0 0 8px rgba(255, 123, 0, 0.5)';
+            });
+        });
+    </script>
+</body>
+</html>            transition: all 0.3s ease;
             border: 1px solid rgba(255, 123, 0, 0.3);
             backdrop-filter: blur(5px);
         }
